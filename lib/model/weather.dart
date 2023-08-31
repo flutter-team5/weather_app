@@ -1,12 +1,12 @@
 class Weather {
   String? name;
-  String? localtime;
+  DateTime? localtime;
   double? tempC;
   int? isDay;
   String? text;
   String? icon;
   double? windKph;
-  double? humidity;
+  int? humidity;
 
   Weather(
       {this.name,
@@ -19,14 +19,17 @@ class Weather {
       this.humidity});
 
   Weather.fromJson(Map json) {
-    name = json['name'];
-    localtime = json['localtime'];
-    tempC = json['temp_c'];
-    isDay = json['is_day'];
-    text = json['text'];
-    icon = json['icon'];
-    windKph = json['wind_kph'];
-    humidity = json['humidity'];
+    Map location = json["location"];
+    name = location['name'];
+    localtime = DateTime.parse(location['localtime']);
+    Map current = json['current'];
+    tempC = current['temp_c'];
+    isDay = current['is_day'];
+    Map condition = current["condition"];
+    text = condition['text'];
+    icon = condition['icon'];
+    humidity = current['humidity'];
+    windKph = current['wind_kph'];
   }
 
   Map toJson() {

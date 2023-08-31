@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/service/news_service.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +10,20 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
-        ),
+            child: FutureBuilder(
+          future: getNews("London"),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text(snapshot.data!.localtime!.hour.toString());
+            }
+            return SizedBox(
+              child: Text("error"),
+            );
+          },
+        )),
       ),
     );
   }
