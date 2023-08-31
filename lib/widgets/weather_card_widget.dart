@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/model/weather.dart';
 
 class WeatherCard extends StatelessWidget {
   const WeatherCard({
     super.key,
-    required this.city,
     required this.weather,
-    required this.degree,
-    required this.time,
   });
 
-  final String city;
-  final String weather;
-  final int degree;
-  final String time;
+  final Weather weather;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        margin: EdgeInsets.all(8),
         padding: const EdgeInsets.all(13),
         width: MediaQuery.of(context).size.width - 20,
         height: MediaQuery.of(context).size.height * 0.15,
         decoration: BoxDecoration(
-          gradient: weather == 'Rainy'
+          gradient: weather.text == 'Rainy'
               ? LinearGradient(
                   colors: [
                     Color.fromARGB(199, 204, 212, 213),
                     Color.fromARGB(193, 154, 188, 255),
                   ],
                 )
-              : weather == 'Sunny'
+              : weather.text == 'Sunny'
                   ? LinearGradient(
                       colors: [
                         Color.fromARGB(181, 255, 133, 160),
@@ -51,21 +47,21 @@ class WeatherCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  city,
+                  weather.name!,
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  time,
+                  weather.formatTime(weather.localtime!),
                   style: TextStyle(
                     fontSize: 17,
                   ),
                 ),
                 Spacer(),
                 Text(
-                  weather,
+                  weather.text!,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -74,7 +70,7 @@ class WeatherCard extends StatelessWidget {
               ],
             ),
             Text(
-              "${degree}°",
+              "${weather.tempC}°",
               style: TextStyle(
                 fontSize: 45,
                 fontWeight: FontWeight.w300,

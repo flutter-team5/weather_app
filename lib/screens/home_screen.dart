@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/constants/spacing.dart';
+import 'package:weather_app/service/database_service.dart';
+import 'package:weather_app/widgets/weather_card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -39,27 +41,23 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               WSpaces.kVspace16,
-              //TODO ADD List view Builder
-              // WeatherCard(
-              //   city: "Riydh",
-              //   time: "3:46 AM",
-              //   weather: "Sunny",
-              //   degree: 39,
-              // ),
-              // WSpaces.kVspace8,
-              // WeatherCard(
-              //   city: "Denver",
-              //   time: "4:45 AM",
-              //   weather: "Rainy",
-              //   degree: 18,
-              // ),
-              // WSpaces.kVspace8,
-              // WeatherCard(
-              //   city: "Riydh",
-              //   time: "3:46 AM",
-              //   weather: "Clear",
-              //   degree: 39,
-              // ),
+              FutureBuilder(
+                future: getCities(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final citiesWeather = snapshot.data ?? [];
+                    return Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return WeatherCard(weather: citiesWeather[index]);
+                        },
+                        itemCount: citiesWeather.length,
+                      ),
+                    );
+                  }
+                  return SizedBox();
+                },
+              ),
             ],
           ),
         ),

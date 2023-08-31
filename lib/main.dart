@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/screens/home_screen.dart';
+import 'package:weather_app/service/database_service.dart';
 
 void main() {
+  initialiseDatabase();
   runApp(const MainApp());
 }
 

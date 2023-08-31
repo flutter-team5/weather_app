@@ -44,4 +44,18 @@ class Weather {
     data['humidity'] = this.humidity;
     return data;
   }
+
+  String formatTime(DateTime dateTime) {
+    String period = 'am';
+    int hour = dateTime.hour;
+
+    if (hour >= 12) {
+      period = 'pm';
+      if (hour > 12) {
+        hour -= 12;
+      }
+    }
+    String minutes = dateTime.minute.toString().padLeft(2, '0');
+    return '$hour:$minutes $period';
+  }
 }
