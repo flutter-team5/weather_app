@@ -14,10 +14,16 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
             child: FutureBuilder(
-          future: getWeather("London"),
+          future: getWeather("Jeddah"),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Text(snapshot.data!.localtime!.hour.toString());
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(snapshot.data!.localtime!.hour.toString()),
+                  Text(snapshot.data!.localtime!.minute.toString()),
+                ],
+              );
             }
             return SizedBox(
               child: Text("error"),
