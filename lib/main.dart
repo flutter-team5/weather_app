@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/service/news_service.dart';
+import 'package:weather_app/service/weather_service.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
             child: FutureBuilder(
-          future: getNews("London"),
+          future: getWeather("London"),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Text(snapshot.data!.localtime!.hour.toString());
