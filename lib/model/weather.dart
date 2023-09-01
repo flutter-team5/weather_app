@@ -34,14 +34,14 @@ class Weather {
 
   Map toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['localtime'] = this.localtime;
-    data['temp_c'] = this.tempC;
-    data['is_day'] = this.isDay;
-    data['text'] = this.text;
-    data['icon'] = this.icon;
-    data['wind_kph'] = this.windKph;
-    data['humidity'] = this.humidity;
+    data['name'] = name;
+    data['localtime'] = localtime;
+    data['temp_c'] = tempC;
+    data['is_day'] = isDay;
+    data['text'] = text;
+    data['icon'] = icon;
+    data['wind_kph'] = windKph;
+    data['humidity'] = humidity;
     return data;
   }
 
