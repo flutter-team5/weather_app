@@ -95,7 +95,15 @@ class WeatherCityScrren extends StatelessWidget {
               children: [
                 Text(
                   "${weather.tempC}°",
-                  style: const TextStyle(fontSize: 60),
+                  style: const TextStyle(
+                    fontSize: 60,
+                  ),
+                ),
+                const Text(
+                  "Sunny",
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
                 ),
                 Text(
                   weather.text!,
@@ -121,7 +129,10 @@ class WeatherCityScrren extends StatelessWidget {
                 Text(
                   weather.name!,
                   style: const TextStyle(
-                      fontSize: 33, fontWeight: FontWeight.bold),
+                    fontSize: 33,
+                    // fontWeight: FontWeight.bold,
+                    fontFamily: 'ADLaMDisplay-Regular',
+                  ),
                 ),
                 WSpaces.kVspace4,
                 const CustomDividerH(),

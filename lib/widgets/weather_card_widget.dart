@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/extension/navigator.dart';
 import 'package:weather_app/model/weather.dart';
-import 'package:weather_app/screens/weather_city_screen.dart';
 
 class WeatherCard extends StatelessWidget {
   const WeatherCard({
@@ -53,7 +51,8 @@ class WeatherCard extends StatelessWidget {
                   weather.name!,
                   style: const TextStyle(
                     fontSize: 25,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'ADLaMDisplay-Regular',
                   ),
                 ),
                 Text(
@@ -68,6 +67,7 @@ class WeatherCard extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
+                    fontFamily: 'ADLaMDisplay-Regular',
                   ),
                 ),
               ],
