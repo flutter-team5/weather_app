@@ -10,7 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.1.0
+  lottie: ^2.6.0
   supabase_flutter: ^1.10.14
+  animations: ^2.0.8
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +21,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: ADLaMDisplay-Regular
+      fonts:
+        - asset: assets/fonts/ADLaMDisplay-Regular.ttf
+    - family: Rubik-VariableFont_wght
+      fonts:
+        - asset: assets/fonts/Rubik-VariableFont_wght.ttf

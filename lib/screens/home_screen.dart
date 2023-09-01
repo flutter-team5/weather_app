@@ -1,5 +1,7 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/constants/spacing.dart';
+import 'package:weather_app/screens/weather_city_screen.dart';
 import 'package:weather_app/service/database_service.dart';
 import 'package:weather_app/widgets/weather_card_widget.dart';
 
@@ -22,7 +24,8 @@ class HomeScreen extends StatelessWidget {
                 "Weather",
                 style: TextStyle(
                   fontSize: 40,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'ADLaMDisplay-Regular',
                 ),
               ),
               WSpaces.kVspace4,
@@ -41,6 +44,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               WSpaces.kVspace16,
+              //adding animation
               FutureBuilder(
                 future: getCities(),
                 builder: (context, snapshot) {
@@ -49,13 +53,24 @@ class HomeScreen extends StatelessWidget {
                     return Expanded(
                       child: ListView.builder(
                         itemBuilder: (context, index) {
-                          return WeatherCard(weather: citiesWeather[index]);
+                          return OpenContainer(
+                            transitionType: ContainerTransitionType.fade,
+                            transitionDuration: Duration(seconds: 2),
+                            openBuilder: (context, _) => WeatherCityScrren(
+                              weather: citiesWeather[index],
+                            ),
+                            closedBuilder:
+                                (context, VoidCallback openContainer) =>
+                                    WeatherCard(
+                              weather: citiesWeather[index],
+                            ),
+                          );
                         },
                         itemCount: citiesWeather.length,
                       ),
                     );
                   }
-                  return SizedBox();
+                  return const SizedBox.shrink();
                 },
               ),
             ],
@@ -65,3 +80,55 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+// FutureBuilder(
+//                 future: getCities(),
+//                 builder: (context, snapshot) {
+//                   if (snapshot.hasData) {
+//                     final citiesWeather = snapshot.data ?? [];
+//                     return Expanded(
+//                       child: ListView.builder(
+//                         itemBuilder: (context, index) {
+//                           return WeatherCard(weather: citiesWeather[index]);
+//                         },
+//                         itemCount: citiesWeather.length,
+//                       ),
+//                     );
+//                   }
+//                   return const SizedBox.shrink();
+//                 },
+//               ),
+
+
+
+
+//  FutureBuilder(
+//                 future: getCities(),
+//                 builder: (context, snapshot) {
+//                   if (snapshot.hasData) {
+//                     final citiesWeather = snapshot.data ?? [];
+//                     return Expanded(
+//                       child: ListView.builder(
+//                         itemBuilder: (context, index) => OpenContainer(
+//                           transitionType: ContainerTransitionType.fade,
+//                           transitionDuration: Duration(seconds: 10),
+//                           openBuilder: (context, _) => WeatherCityScrren(
+//                             weather: citiesWeather[index],
+//                           ),
+//                           closedBuilder:
+//                               (context, VoidCallback OpenContainer) =>
+//                                   WeatherCard(
+//                             weather: citiesWeather[index],
+//                           ),
+//                         ),
+//                         itemCount: citiesWeather.length,
+//                       ),
+//                     );
+//                   }
+//                   return const SizedBox.shrink();
+//                 },
+//               ),

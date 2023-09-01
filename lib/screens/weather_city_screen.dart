@@ -105,6 +105,10 @@ class WeatherCityScrren extends StatelessWidget {
                     fontSize: 30,
                   ),
                 ),
+                Text(
+                  weather.text!,
+                  style: const TextStyle(fontSize: 30),
+                ),
               ],
             ),
           ),

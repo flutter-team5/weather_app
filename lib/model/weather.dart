@@ -58,4 +58,24 @@ class Weather {
     String minutes = dateTime.minute.toString().padLeft(2, '0');
     return '$hour:$minutes $period';
   }
+
+  String getDate() {
+    int month = localtime!.month - 1;
+    List<String> months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
+    return "${months[month]} ${localtime!.day}";
+  }
 }
