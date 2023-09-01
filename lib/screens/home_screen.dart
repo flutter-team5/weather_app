@@ -24,7 +24,8 @@ class HomeScreen extends StatelessWidget {
                 "Weather",
                 style: TextStyle(
                   fontSize: 40,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'ADLaMDisplay-Regular',
                 ),
               ),
               WSpaces.kVspace4,
