@@ -20,15 +20,15 @@ class WeatherCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width - 20,
         height: MediaQuery.of(context).size.height * 0.15,
         decoration: BoxDecoration(
-          gradient: weather.text!.toUpperCase().contains('rainy') ||
-                  weather.text!.toUpperCase().contains('cloudy')
+          gradient: weather.text!.toLowerCase().contains('rainy') ||
+                  weather.text!.toLowerCase().contains('cloudy')
               ? const LinearGradient(
                   colors: [
                     Color.fromARGB(199, 204, 212, 213),
                     Color.fromARGB(193, 154, 188, 255),
                   ],
                 )
-              : weather.text!.toUpperCase().contains('sunny')
+              : weather.text!.toLowerCase().contains('sunny')
                   ? const LinearGradient(
                       colors: [
                         Color.fromARGB(181, 255, 133, 160),
