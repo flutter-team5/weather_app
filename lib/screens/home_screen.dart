@@ -48,6 +48,35 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               WSpaces.kVspace16,
+              //adding animation
+              FutureBuilder(
+                future: getCities(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final citiesWeather = snapshot.data ?? [];
+                    return Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return OpenContainer(
+                            transitionType: ContainerTransitionType.fade,
+                            transitionDuration: const Duration(seconds: 1),
+                            openBuilder: (context, _) => WeatherCityScrren(
+                              weather: citiesWeather[index],
+                            ),
+                            closedBuilder:
+                                (context, VoidCallback openContainer) =>
+                                    WeatherCard(
+                              weather: citiesWeather[index],
+                            ),
+                          );
+                        },
+                        itemCount: citiesWeather.length,
+                      ),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
               BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
                 if (state is LoadingState) {
                   return const Center(child: CircularProgressIndicator());

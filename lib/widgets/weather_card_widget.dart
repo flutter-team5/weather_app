@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/constants/colors.dart';
 import 'package:weather_app/model/weather.dart';
 
 class WeatherCard extends StatelessWidget {
@@ -20,25 +21,10 @@ class WeatherCard extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: weather.text!.toLowerCase().contains('rainy') ||
                   weather.text!.toLowerCase().contains('cloudy')
-              ? const LinearGradient(
-                  colors: [
-                    Color.fromARGB(199, 204, 212, 213),
-                    Color.fromARGB(193, 154, 188, 255),
-                  ],
-                )
+              ? WColors.cloudy
               : weather.text!.toLowerCase().contains('sunny')
-                  ? const LinearGradient(
-                      colors: [
-                        Color.fromARGB(181, 255, 133, 160),
-                        Color.fromARGB(255, 249, 205, 139)
-                      ],
-                    )
-                  : const LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 184, 243, 250),
-                        Color.fromARGB(255, 227, 249, 246)
-                      ],
-                    ),
+                  ? WColors.sunny
+                  : WColors.clear,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -77,17 +63,12 @@ class WeatherCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 45,
                 fontWeight: FontWeight.w300,
+                fontFamily: 'Rubik-VariableFont_wght',
               ),
             ),
           ],
         ),
       ),
-      // onTap: () {
-      //   context.push(
-      //       screen: WeatherCityScrren(
-      //     weather: weather,
-      //   ));
-      // },
     );
   }
 }
