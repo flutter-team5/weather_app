@@ -97,9 +97,9 @@ class WeatherCityScrren extends StatelessWidget {
                   "${weather.tempC}°",
                   style: const TextStyle(fontSize: 60),
                 ),
-                const Text(
-                  "Sunny",
-                  style: TextStyle(fontSize: 30),
+                Text(
+                  weather.text!,
+                  style: const TextStyle(fontSize: 30),
                 ),
               ],
             ),
