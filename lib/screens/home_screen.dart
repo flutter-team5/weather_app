@@ -1,8 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/constants/spacing.dart';
+import 'package:weather_app/model/weather.dart';
 import 'package:weather_app/screens/weather_city_screen.dart';
-import 'package:weather_app/service/database_service.dart';
 import 'package:weather_app/widgets/weather_card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,6 +14,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<WeatherBloc>().add(GetWeathersEvent());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -45,39 +48,54 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               WSpaces.kVspace16,
-              //adding animation
-              FutureBuilder(
-                future: getCities(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final citiesWeather = snapshot.data ?? [];
-                    return Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return OpenContainer(
-                            closedElevation: 0,
-                            transitionType: ContainerTransitionType.fade,
-                            transitionDuration: const Duration(seconds: 1),
-                            openBuilder: (context, _) => WeatherCityScrren(
-                              weather: citiesWeather[index],
-                            ),
-                            closedBuilder:
-                                (context, VoidCallback openContainer) =>
-                                    WeatherCard(
-                              weather: citiesWeather[index],
-                            ),
-                          );
-                        },
-                        itemCount: citiesWeather.length,
-                      ),
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
+              BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
+                if (state is LoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is GetWeathersSuccessedState) {
+                  final citiesWeather = state.weathers ?? [];
+                  return WeathersListView(
+                    citiesWeather: citiesWeather,
+                  );
+                } else if (state is FailedState) {
+                  return const Text("Error");
+                }
+
+                return const SizedBox.shrink();
+              })
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class WeathersListView extends StatelessWidget {
+  const WeathersListView({
+    super.key,
+    required this.citiesWeather,
+  });
+
+  final List<Weather> citiesWeather;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return OpenContainer(
+            closedElevation: 0,
+            transitionType: ContainerTransitionType.fade,
+            transitionDuration: const Duration(seconds: 1),
+            openBuilder: (context, _) => WeatherCityScrren(
+              weather: citiesWeather[index],
+            ),
+            closedBuilder: (context, VoidCallback openContainer) => WeatherCard(
+              weather: citiesWeather[index],
+            ),
+          );
+        },
+        itemCount: citiesWeather.length,
       ),
     );
   }
