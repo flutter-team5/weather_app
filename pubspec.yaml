@@ -20,5 +20,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/img/
+  fonts:
+    - family: ADLaMDisplay-Regular
+      fonts:
+        - asset: assets/fonts/ADLaMDisplay-Regular.ttf
+    - family: Rubik-VariableFont_wght
+      fonts:
+        - asset: assets/fonts/Rubik-VariableFont_wght.ttf
