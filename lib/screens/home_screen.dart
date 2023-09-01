@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -53,8 +54,9 @@ class HomeScreen extends StatelessWidget {
                       child: ListView.builder(
                         itemBuilder: (context, index) {
                           return OpenContainer(
+                            closedElevation: 0,
                             transitionType: ContainerTransitionType.fade,
-                            transitionDuration: Duration(seconds: 2),
+                            transitionDuration: const Duration(seconds: 1),
                             openBuilder: (context, _) => WeatherCityScrren(
                               weather: citiesWeather[index],
                             ),
