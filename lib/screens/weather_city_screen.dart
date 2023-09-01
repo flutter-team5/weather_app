@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:weather_app/constants/colors.dart';
 import 'package:weather_app/constants/spacing.dart';
 import 'package:weather_app/extension/navigator.dart';
 import 'package:weather_app/model/weather.dart';
@@ -21,18 +23,37 @@ class WeatherCityScrren extends StatelessWidget {
             left: 0,
             right: 0,
             height: MediaQuery.of(context).size.height * 0.75,
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color.fromARGB(181, 255, 133, 160),
-                    Color.fromARGB(255, 249, 205, 139)
-                  ],
-                ),
-              ),
-            ),
+            child: weather.text!.toLowerCase().contains('rainy') ||
+                    weather.text!.toLowerCase().contains('cloudy') ||
+                    weather.text!.toLowerCase().contains('sunny')
+                ? Container(
+                    decoration: BoxDecoration(
+                      gradient: weather.text!.toLowerCase().contains('rainy') ||
+                              weather.text!.toLowerCase().contains('cloudy')
+                          ? WColors.cloudy
+                          : weather.text!.toLowerCase().contains('sunny')
+                              ? WColors.sunny
+                              : WColors.clear,
+                    ),
+                  )
+                : Shimmer.fromColors(
+                    baseColor: WColors.lightBlue,
+                    highlightColor: WColors.whiteBlue,
+                    period: const Duration(seconds: 5),
+                    enabled: true,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: weather.text!
+                                    .toLowerCase()
+                                    .contains('rainy') ||
+                                weather.text!.toLowerCase().contains('cloudy')
+                            ? WColors.cloudy
+                            : weather.text!.toLowerCase().contains('sunny')
+                                ? WColors.sunny
+                                : WColors.clear,
+                      ),
+                    ),
+                  ),
           ),
           Positioned(
             top: 40,
@@ -66,7 +87,6 @@ class WeatherCityScrren extends StatelessWidget {
             child: ClipPath(
               clipper: CustomClipPath1(),
               child: Container(
-                // width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(128, 255, 255, 255),
                 ),
@@ -97,12 +117,7 @@ class WeatherCityScrren extends StatelessWidget {
                   "${weather.tempC}°",
                   style: const TextStyle(
                     fontSize: 60,
-                  ),
-                ),
-                const Text(
-                  "Sunny",
-                  style: TextStyle(
-                    fontSize: 30,
+                    fontFamily: 'Rubik-VariableFont_wght',
                   ),
                 ),
                 Text(
@@ -115,10 +130,18 @@ class WeatherCityScrren extends StatelessWidget {
           Positioned(
             top: 90,
             left: 200,
-            child: Lottie.network(
-              "https://lottie.host/213b8bd6-ea40-49af-8977-46f5b4671867/ANtgnFluqA.json",
-              width: 350,
-            ),
+            child: weather.text!.toLowerCase().contains('rainy') ||
+                    weather.text!.toLowerCase().contains('cloudy')
+                ? Lottie.network(
+                    "https://lottie.host/52f4e94a-21a8-47fb-81d2-2e2d7f6c534a/HjJehQX5U2.json",
+                    width: 300,
+                  )
+                : weather.text!.toLowerCase().contains('sunny')
+                    ? Lottie.network(
+                        "https://lottie.host/213b8bd6-ea40-49af-8977-46f5b4671867/ANtgnFluqA.json",
+                        width: 350,
+                      )
+                    : const SizedBox(),
           ),
           Positioned(
             bottom: 70,
@@ -130,7 +153,6 @@ class WeatherCityScrren extends StatelessWidget {
                   weather.name!,
                   style: const TextStyle(
                     fontSize: 33,
-                    // fontWeight: FontWeight.bold,
                     fontFamily: 'ADLaMDisplay-Regular',
                   ),
                 ),

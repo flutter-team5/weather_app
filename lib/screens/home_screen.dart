@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return OpenContainer(
                             transitionType: ContainerTransitionType.fade,
-                            transitionDuration: Duration(seconds: 2),
+                            transitionDuration: const Duration(seconds: 1),
                             openBuilder: (context, _) => WeatherCityScrren(
                               weather: citiesWeather[index],
                             ),
