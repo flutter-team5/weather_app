@@ -82,12 +82,12 @@ class WeatherCard extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {
-        context.push(
-            screen: WeatherCityScrren(
-          weather: weather,
-        ));
-      },
+      // onTap: () {
+      //   context.push(
+      //       screen: WeatherCityScrren(
+      //     weather: weather,
+      //   ));
+      // },
     );
   }
 }
