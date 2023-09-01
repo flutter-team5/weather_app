@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/screens/home_screen.dart';
 import 'package:weather_app/service/database_service.dart';
 
@@ -12,9 +14,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: BlocProvider(
+        create: (context) => WeatherBloc(),
+        child: HomeScreen()),
     );
   }
 }
