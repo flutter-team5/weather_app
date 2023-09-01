@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   }
-                  return SizedBox();
+                  return const SizedBox.shrink();
                 },
               ),
             ],

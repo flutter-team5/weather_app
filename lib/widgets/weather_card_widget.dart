@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/extension/navigator.dart';
 import 'package:weather_app/model/weather.dart';
+import 'package:weather_app/screens/weather_city_screen.dart';
 
 class WeatherCard extends StatelessWidget {
   const WeatherCard({
@@ -13,26 +15,27 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(13),
         width: MediaQuery.of(context).size.width - 20,
         height: MediaQuery.of(context).size.height * 0.15,
         decoration: BoxDecoration(
-          gradient: weather.text == 'Rainy'
-              ? LinearGradient(
+          gradient: weather.text!.toUpperCase().contains('rainy') ||
+                  weather.text!.toUpperCase().contains('cloudy')
+              ? const LinearGradient(
                   colors: [
                     Color.fromARGB(199, 204, 212, 213),
                     Color.fromARGB(193, 154, 188, 255),
                   ],
                 )
-              : weather.text == 'Sunny'
-                  ? LinearGradient(
+              : weather.text!.toUpperCase().contains('sunny')
+                  ? const LinearGradient(
                       colors: [
                         Color.fromARGB(181, 255, 133, 160),
                         Color.fromARGB(255, 249, 205, 139)
                       ],
                     )
-                  : LinearGradient(
+                  : const LinearGradient(
                       colors: [
                         Color.fromARGB(255, 184, 243, 250),
                         Color.fromARGB(255, 227, 249, 246)
@@ -48,21 +51,21 @@ class WeatherCard extends StatelessWidget {
               children: [
                 Text(
                   weather.name!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   weather.formatTime(weather.localtime!),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   weather.text!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -71,7 +74,7 @@ class WeatherCard extends StatelessWidget {
             ),
             Text(
               "${weather.tempC}°",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 45,
                 fontWeight: FontWeight.w300,
               ),
@@ -79,6 +82,12 @@ class WeatherCard extends StatelessWidget {
           ],
         ),
       ),
+      onTap: () {
+        context.push(
+            screen: WeatherCityScrren(
+          weather: weather,
+        ));
+      },
     );
   }
 }
