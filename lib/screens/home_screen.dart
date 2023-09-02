@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 224, 224, 224),
       // backgroundColor: Colors.white,
       body: SafeArea(
+        bottom: false,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -56,10 +57,9 @@ class HomeScreen extends StatelessWidget {
                     );
                   } else if (state is AddWeatherSuccessedState) {
                     context.read<WeatherBloc>().add(GetWeathersEvent());
-                  }else if (state is CityNotFoundState) {
+                  } else if (state is CityNotFoundState) {
                     context.read<WeatherBloc>().add(GetWeathersEvent());
-                  }
-                   else if (state is FailedState) {
+                  } else if (state is FailedState) {
                     return const FailedStateMsg();
                   }
                   return const SizedBox.shrink();
