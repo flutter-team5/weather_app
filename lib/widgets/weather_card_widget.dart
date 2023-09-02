@@ -28,7 +28,8 @@ class WeatherCard extends StatelessWidget {
             ),
           ],
           gradient: weather.text!.toLowerCase().contains('rainy') ||
-                  weather.text!.toLowerCase().contains('patchy')
+                  weather.text!.toLowerCase().contains('patchy') ||
+                  weather.text!.toLowerCase().contains('mist')
               ? WColors.rainy
               : weather.text!.toLowerCase().contains('cloudy') ||
                       weather.text!.toLowerCase().contains('overcast')

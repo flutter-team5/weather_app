@@ -10,8 +10,8 @@ class WColors {
 
   static const rainy = LinearGradient(
     colors: [
-      Color.fromARGB(198, 190, 196, 197),
-      Color.fromARGB(168, 141, 172, 233),
+      Color.fromARGB(197, 212, 218, 219),
+      Color.fromARGB(170, 169, 197, 252),
     ],
   );
 

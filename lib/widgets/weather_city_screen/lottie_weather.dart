@@ -10,7 +10,8 @@ class LottieWeather extends StatelessWidget {
   Widget build(BuildContext context) {
     return weather.text!.toLowerCase().contains('rainy') ||
             weather.text!.toLowerCase().contains('patchy') ||
-            weather.text!.toLowerCase().contains('thunder')
+            weather.text!.toLowerCase().contains('thunder') ||
+            weather.text!.toLowerCase().contains('mist')
         ? Lottie.network(
             "https://lottie.host/52f4e94a-21a8-47fb-81d2-2e2d7f6c534a/HjJehQX5U2.json",
             width: 270,

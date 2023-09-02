@@ -13,19 +13,18 @@ class WeatherContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          gradient: weather.text!.toLowerCase().contains('rainy') ||
-                  weather.text!.toLowerCase().contains('patchy')
-              ? WColors.rainy
-              : weather.text!.toLowerCase().contains('cloudy') ||
-                      weather.text!
-                          .toLowerCase()
-                          .contains('overcast')
-                  ? WColors.cloudy
-                  : weather.text!.toLowerCase().contains('sunny')
-                      ? WColors.sunny
-                      : WColors.clear,
-        ),
-      );
+      decoration: BoxDecoration(
+        gradient: weather.text!.toLowerCase().contains('rainy') ||
+                weather.text!.toLowerCase().contains('patchy') ||
+                weather.text!.toLowerCase().contains('mist')
+            ? WColors.rainy
+            : weather.text!.toLowerCase().contains('cloudy') ||
+                    weather.text!.toLowerCase().contains('overcast')
+                ? WColors.cloudy
+                : weather.text!.toLowerCase().contains('sunny')
+                    ? WColors.sunny
+                    : WColors.clear,
+      ),
+    );
   }
 }
