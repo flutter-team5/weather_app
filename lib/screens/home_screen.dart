@@ -56,7 +56,10 @@ class HomeScreen extends StatelessWidget {
                     );
                   } else if (state is AddWeatherSuccessedState) {
                     context.read<WeatherBloc>().add(GetWeathersEvent());
-                  } else if (state is FailedState) {
+                  }else if (state is CityNotFoundState) {
+                    context.read<WeatherBloc>().add(GetWeathersEvent());
+                  }
+                   else if (state is FailedState) {
                     return const FailedStateMsg();
                   }
                   return const SizedBox.shrink();
