@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               WSpaces.kVspace16,
-              //adding animation
+
               BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
                 if (state is LoadingState) {
                   return Padding(
@@ -171,55 +171,3 @@ class WeathersListView extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-// FutureBuilder(
-//                 future: getCities(),
-//                 builder: (context, snapshot) {
-//                   if (snapshot.hasData) {
-//                     final citiesWeather = snapshot.data ?? [];
-//                     return Expanded(
-//                       child: ListView.builder(
-//                         itemBuilder: (context, index) {
-//                           return WeatherCard(weather: citiesWeather[index]);
-//                         },
-//                         itemCount: citiesWeather.length,
-//                       ),
-//                     );
-//                   }
-//                   return const SizedBox.shrink();
-//                 },
-//               ),
-
-
-
-
-//  FutureBuilder(
-//                 future: getCities(),
-//                 builder: (context, snapshot) {
-//                   if (snapshot.hasData) {
-//                     final citiesWeather = snapshot.data ?? [];
-//                     return Expanded(
-//                       child: ListView.builder(
-//                         itemBuilder: (context, index) => OpenContainer(
-//                           transitionType: ContainerTransitionType.fade,
-//                           transitionDuration: Duration(seconds: 10),
-//                           openBuilder: (context, _) => WeatherCityScrren(
-//                             weather: citiesWeather[index],
-//                           ),
-//                           closedBuilder:
-//                               (context, VoidCallback OpenContainer) =>
-//                                   WeatherCard(
-//                             weather: citiesWeather[index],
-//                           ),
-//                         ),
-//                         itemCount: citiesWeather.length,
-//                       ),
-//                     );
-//                   }
-//                   return const SizedBox.shrink();
-//                 },
-//               ),

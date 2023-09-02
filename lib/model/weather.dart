@@ -21,7 +21,8 @@ class Weather {
   Weather.fromJson(Map json) {
     Map location = json["location"];
     name = location['name'];
-    localtime = DateTime.parse(location['localtime']);
+    localtime =
+        DateTime.parse(formatDateTimeLeadingZeros(location['localtime']));
     Map current = json['current'];
     tempC = current['temp_c'];
     isDay = current['is_day'];
@@ -57,6 +58,24 @@ class Weather {
     }
     String minutes = dateTime.minute.toString().padLeft(2, '0');
     return '$hour:$minutes $period';
+  }
+
+  String formatDateTimeLeadingZeros(String dateTimeString) {
+    List<String> dateTimeComponents = dateTimeString.split(' ');
+
+    if (dateTimeComponents.length == 2) {
+      String datePart = dateTimeComponents[0];
+      String timePart = dateTimeComponents[1];
+      List<String> timeComponents = timePart.split(':');
+
+      if (timeComponents.length == 2) {
+        String hours = timeComponents[0].padLeft(2, '0');
+        String minutes = timeComponents[1].padLeft(2, '0');
+        String formattedDateTime = '$datePart $hours:$minutes';
+        return formattedDateTime;
+      }
+    }
+    return dateTimeString;
   }
 
   String getDate() {
