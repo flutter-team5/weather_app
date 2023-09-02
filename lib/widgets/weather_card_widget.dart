@@ -19,12 +19,14 @@ class WeatherCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width - 20,
         height: MediaQuery.of(context).size.height * 0.15,
         decoration: BoxDecoration(
-          gradient: weather.text!.toLowerCase().contains('rainy') ||
-                  weather.text!.toLowerCase().contains('cloudy')
-              ? WColors.cloudy
-              : weather.text!.toLowerCase().contains('sunny')
-                  ? WColors.sunny
-                  : WColors.clear,
+          gradient: weather.text!.toLowerCase().contains('rainy')
+              ? WColors.rainy
+              : weather.text!.toLowerCase().contains('cloudy') ||
+                      weather.text!.toLowerCase().contains('overcast')
+                  ? WColors.cloudy
+                  : weather.text!.toLowerCase().contains('sunny')
+                      ? WColors.sunny
+                      : WColors.clear,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(

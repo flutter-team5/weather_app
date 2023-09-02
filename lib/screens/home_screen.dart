@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/constants/spacing.dart';
 import 'package:weather_app/model/weather.dart';
@@ -17,10 +18,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<WeatherBloc>().add(GetWeathersEvent());
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -28,37 +29,106 @@ class HomeScreen extends StatelessWidget {
               const Text(
                 "Weather",
                 style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 38,
                   fontFamily: 'ADLaMDisplay-Regular',
+                  //'Rubik-VariableFont_wght'
+                  color: Color.fromARGB(157, 0, 0, 0),
                 ),
               ),
               WSpaces.kVspace4,
-              const SizedBox(
-                height: 50,
+              Container(
+                decoration: const ShapeDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 188, 187, 187),
+                      Color.fromARGB(255, 243, 243, 243)
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0.0, 0.45],
+                    tileMode: TileMode.clamp,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                  ),
+                ),
                 child: TextField(
+                  expands: false,
+                  style: const TextStyle(fontSize: 20.0, color: Colors.black54),
                   decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(12.0),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.black54,
+                    ),
                     hintText: 'Search for a city',
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                      fontFamily: 'Rubik-VariableFont_wght',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(32.0),
                     ),
                   ),
                 ),
               ),
               WSpaces.kVspace16,
+
               BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
                 if (state is LoadingState) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 180.0),
+                    child: Center(
+                      child: Lottie.network(
+                        'https://lottie.host/e2cd8a23-9454-4b5f-a76b-ea261a4e0ab0/dvdTaHYG4n.json',
+                        width: MediaQuery.of(context).size.width * 0.3,
+                      ),
+                      //CircularProgressIndicator(),
+                    ),
+                  );
                 } else if (state is GetWeathersSuccessedState) {
                   final citiesWeather = state.weathers ?? [];
                   return WeathersListView(
                     citiesWeather: citiesWeather,
                   );
                 } else if (state is FailedState) {
-                  return const Text("Error");
+                  return Center(
+                    child: Column(
+                      children: [
+                        WSpaces.kVspace124,
+                        Icon(
+                          Icons.error_outline_rounded,
+                          size: 100,
+                          color: Colors.grey.shade500,
+                        ),
+                        WSpaces.kVspace8,
+                        Text(
+                          "Oops!",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontFamily: 'Rubik-VariableFont_wght',
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
+                        WSpaces.kVspace8,
+                        Text(
+                          "Something went wrong.\nPlease refresh the page.",
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontFamily: 'Rubik-VariableFont_wght',
+                            color: Colors.grey.shade500,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
                 }
 
                 return const SizedBox.shrink();

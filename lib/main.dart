@@ -18,7 +18,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => WeatherBloc(),
-        child: HomeScreen()),
+        child: const HomeScreen(),
+      ),
     );
   }
 }
