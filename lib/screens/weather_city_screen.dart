@@ -25,6 +25,8 @@ class WeatherCityScrren extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.75,
             child: weather.text!.toLowerCase().contains('rainy') ||
                     weather.text!.toLowerCase().contains('patchy') ||
+                    weather.text!.toLowerCase().contains('thunder') ||
+                    weather.text!.toLowerCase().contains('mist') ||
                     weather.text!.toLowerCase().contains('cloudy') ||
                     weather.text!.toLowerCase().contains('sunny')
                 ? WeatherContainer(weather: weather)
@@ -91,7 +93,8 @@ class WeatherCityScrren extends StatelessWidget {
                     weather.text!.toLowerCase().contains('overcast')
                 ? 0
                 : 200,
-            child: LottieWeather( //Lottie image will be retured here
+            child: LottieWeather(
+              //Lottie image will be retured here
               weather: weather,
             ),
           ),
