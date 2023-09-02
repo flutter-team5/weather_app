@@ -28,6 +28,7 @@ class WeathersListView extends StatelessWidget {
                   child: OpenContainer(
                     closedElevation: 0,
                     openColor: const Color.fromARGB(75, 255, 255, 255),
+                    closedColor: const Color.fromARGB(255, 224, 224, 224),
                     transitionType: ContainerTransitionType.fade,
                     transitionDuration: const Duration(seconds: 1),
                     openBuilder: (context, _) => WeatherCityScrren(

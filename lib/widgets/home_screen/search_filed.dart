@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/bloc/weather_bloc.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -48,6 +50,9 @@ class SearchField extends StatelessWidget {
             borderRadius: BorderRadius.circular(32.0),
           ),
         ),
+        onSubmitted: (value) {
+          context.read<WeatherBloc>().add(AddWeatherEvent(value));
+        },
       ),
     );
   }

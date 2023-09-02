@@ -47,7 +47,6 @@ class HomeScreen extends StatelessWidget {
                           'https://lottie.host/e2cd8a23-9454-4b5f-a76b-ea261a4e0ab0/dvdTaHYG4n.json',
                           width: MediaQuery.of(context).size.width * 0.3,
                         ),
-                        //CircularProgressIndicator(),
                       ),
                     );
                   } else if (state is GetWeathersSuccessedState) {
@@ -55,6 +54,8 @@ class HomeScreen extends StatelessWidget {
                     return WeathersListView(
                       citiesWeather: citiesWeather,
                     );
+                  } else if (state is AddWeatherSuccessedState) {
+                    context.read<WeatherBloc>().add(GetWeathersEvent());
                   } else if (state is FailedState) {
                     return const FailedStateMsg();
                   }
