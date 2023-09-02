@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:weather_app/constants/colors.dart';
-import 'package:weather_app/constants/spacing.dart';
 import 'package:weather_app/extension/navigator.dart';
 import 'package:weather_app/model/weather.dart';
-import 'package:weather_app/widgets/custom_continer_widgets.dart';
-import 'package:weather_app/widgets/custom_dividers.dart';
-
+import 'package:weather_app/widgets/weather_city_screen/city_column_info.dart';
+import 'package:weather_app/widgets/weather_city_screen/clear_weather_container.dart';
+import 'package:weather_app/widgets/weather_city_screen/custom_continer_widgets.dart';
+import 'package:weather_app/widgets/weather_city_screen/lottie_weather.dart';
+import 'package:weather_app/widgets/weather_city_screen/weather_column_info.dart';
+import 'package:weather_app/widgets/weather_city_screen/weather_container.dart';
 
 class WeatherCityScrren extends StatelessWidget {
   const WeatherCityScrren({super.key, required this.weather});
@@ -28,41 +27,8 @@ class WeatherCityScrren extends StatelessWidget {
                     weather.text!.toLowerCase().contains('patchy') ||
                     weather.text!.toLowerCase().contains('cloudy') ||
                     weather.text!.toLowerCase().contains('sunny')
-                ? Container(
-                    decoration: BoxDecoration(
-                      gradient: weather.text!.toLowerCase().contains('rainy') ||
-                              weather.text!.toLowerCase().contains('patchy')
-                          ? WColors.rainy
-                          : weather.text!.toLowerCase().contains('cloudy') ||
-                                  weather.text!
-                                      .toLowerCase()
-                                      .contains('overcast')
-                              ? WColors.cloudy
-                              : weather.text!.toLowerCase().contains('sunny')
-                                  ? WColors.sunny
-                                  : WColors.clear,
-                    ),
-                  )
-                : Shimmer.fromColors(
-                    baseColor: WColors.lightBlue,
-                    highlightColor: WColors.whiteBlue,
-                    period: const Duration(seconds: 5),
-                    enabled: true,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: weather.text!.toLowerCase().contains('rainy')
-                            ? WColors.rainy
-                            : weather.text!.toLowerCase().contains('cloudy') ||
-                                    weather.text!
-                                        .toLowerCase()
-                                        .contains('overcast')
-                                ? WColors.cloudy
-                                : weather.text!.toLowerCase().contains('sunny')
-                                    ? WColors.sunny
-                                    : WColors.clear,
-                      ),
-                    ),
-                  ),
+                ? WeatherContainer(weather: weather)
+                : const ClearWeatherContainer(),
           ),
           Positioned(
             top: 40,
@@ -124,120 +90,20 @@ class WeatherCityScrren extends StatelessWidget {
             left: weather.text!.toLowerCase().contains('cloudy') ||
                     weather.text!.toLowerCase().contains('overcast')
                 ? 0
-                : 200, //
-            child: weather.text!.toLowerCase().contains('rainy') ||
-                    weather.text!.toLowerCase().contains('patchy')||
-                    weather.text!.toLowerCase().contains('thunder')
-                ? Lottie.network(
-                    "https://lottie.host/52f4e94a-21a8-47fb-81d2-2e2d7f6c534a/HjJehQX5U2.json",
-                    width: 300,
-                  )
-                : weather.text!.toLowerCase().contains('cloudy') ||
-                        weather.text!.toLowerCase().contains('overcast')
-                    ? Lottie.network(
-                        "https://lottie.host/82865c61-fbd9-4dfa-a926-562c14c26073/ytDM4qQt55.json",
-                        width: 450,
-                      )
-                    : weather.text!.toLowerCase().contains('sunny')
-                        ? Lottie.network(
-                            "https://lottie.host/213b8bd6-ea40-49af-8977-46f5b4671867/ANtgnFluqA.json",
-                            width: 350,
-                          )
-                        : const SizedBox(),
+                : 200,
+            child: LottieWeather( //Lottie image will be retured here
+              weather: weather,
+            ),
           ),
           Positioned(
             top: 115,
             left: 50,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${weather.tempC}°",
-                  style: const TextStyle(
-                    fontSize: 60,
-                    fontFamily: 'Rubik-VariableFont_wght',
-                  ),
-                ),
-                Text(
-                  weather.text!,
-                  style: const TextStyle(fontSize: 30),
-                ),
-              ],
-            ),
+            child: WeatherColumnInfo(weather: weather),
           ),
           Positioned(
             bottom: 70,
             left: 50,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  weather.name!,
-                  style: const TextStyle(
-                    fontSize: 33,
-                    fontFamily: 'ADLaMDisplay-Regular',
-                  ),
-                ),
-                WSpaces.kVspace4,
-                const CustomDividerH(),
-                WSpaces.kVspace8,
-                Text(
-                  weather.getDate(),
-                  style: const TextStyle(
-                    fontSize: 37,
-                  ),
-                ),
-                WSpaces.kVspace4,
-                Text(
-                  weather.formatTime(weather.localtime!),
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                WSpaces.kVspace24,
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "HUMDITY",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                        Text(
-                          "${weather.humidity}%",
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                    WSpaces.kHspace16,
-                    const CustomDividerV(),
-                    WSpaces.kHspace8,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "WIND kph",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                        Text(
-                          "${weather.windKph}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            child: CityColumnInfo(weather: weather),
           ),
         ],
       ),
