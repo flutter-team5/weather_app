@@ -18,5 +18,16 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         emit(FailedState());
       }
     });
+
+    on<AddWeatherEvent>((event, emit) async {
+      emit(LoadingState());
+
+      try {
+        await insertCity(event.name);
+        emit(AddWeatherSuccessedState());
+      } catch (e) {
+        emit(FailedState());
+      }
+    });
   }
 }

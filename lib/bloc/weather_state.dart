@@ -10,6 +10,12 @@ final class GetWeathersSuccessedState extends WeatherState {
   GetWeathersSuccessedState(this.weathers);
 }
 
+final class AddWeatherSuccessedState extends WeatherState {}
+
+final class CityNotFoundState extends WeatherState {}
+
+final class CityDuplicatedState extends WeatherState {}
+
 final class FailedState extends WeatherState {}
 
 final class LoadingState extends WeatherState {}
