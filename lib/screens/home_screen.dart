@@ -1,12 +1,12 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/constants/spacing.dart';
 import 'package:weather_app/model/weather.dart';
 import 'package:weather_app/screens/weather_city_screen.dart';
-import 'package:weather_app/service/database_service.dart';
 import 'package:weather_app/widgets/weather_card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,7 +18,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<WeatherBloc>().add(GetWeathersEvent());
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
+      //backgroundColor: const Color.fromARGB(255, 224, 224, 224),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -80,7 +81,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               WSpaces.kVspace16,
-
               BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
                 if (state is LoadingState) {
                   return Padding(
@@ -152,21 +152,34 @@ class WeathersListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return OpenContainer(
-            closedElevation: 0,
-            transitionType: ContainerTransitionType.fade,
-            transitionDuration: const Duration(seconds: 1),
-            openBuilder: (context, _) => WeatherCityScrren(
-              weather: citiesWeather[index],
-            ),
-            closedBuilder: (context, VoidCallback openContainer) => WeatherCard(
-              weather: citiesWeather[index],
-            ),
-          );
-        },
-        itemCount: citiesWeather.length,
+      child: AnimationLimiter(
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              duration: const Duration(milliseconds: 450),
+              child: SlideAnimation(
+                verticalOffset: 70.0,
+                child: FadeInAnimation(
+                  child: OpenContainer(
+                    closedElevation: 0,
+                    openColor: const Color.fromARGB(75, 255, 255, 255),
+                    transitionType: ContainerTransitionType.fade,
+                    transitionDuration: const Duration(seconds: 1),
+                    openBuilder: (context, _) => WeatherCityScrren(
+                      weather: citiesWeather[index],
+                    ),
+                    closedBuilder: (context, VoidCallback openContainer) =>
+                        WeatherCard(
+                      weather: citiesWeather[index],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+          itemCount: citiesWeather.length,
+        ),
       ),
     );
   }

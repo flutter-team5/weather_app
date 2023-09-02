@@ -14,12 +14,21 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        margin: const EdgeInsets.all(8),
+        margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(13),
         width: MediaQuery.of(context).size.width - 20,
         height: MediaQuery.of(context).size.height * 0.15,
         decoration: BoxDecoration(
-          gradient: weather.text!.toLowerCase().contains('rainy')
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.8),
+              spreadRadius: 1,
+              blurRadius: 7,
+              offset: const Offset(2, 4), // shadow position
+            ),
+          ],
+          gradient: weather.text!.toLowerCase().contains('rainy') ||
+                  weather.text!.toLowerCase().contains('patchy')
               ? WColors.rainy
               : weather.text!.toLowerCase().contains('cloudy') ||
                       weather.text!.toLowerCase().contains('overcast')
@@ -35,12 +44,17 @@ class WeatherCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  weather.name!,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'ADLaMDisplay-Regular',
+                SizedBox(
+                  width: 170,
+                  child: Text(
+                    weather.name!,
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'ADLaMDisplay-Regular',
+                    ),
                   ),
                 ),
                 Text(
@@ -50,12 +64,17 @@ class WeatherCard extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Text(
-                  weather.text!,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'ADLaMDisplay-Regular',
+                SizedBox(
+                  width: 150,
+                  child: Text(
+                    weather.text!,
+                    overflow: TextOverflow.clip,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'ADLaMDisplay-Regular',
+                    ),
                   ),
                 ),
               ],

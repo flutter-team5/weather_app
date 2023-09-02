@@ -8,6 +8,7 @@ import 'package:weather_app/model/weather.dart';
 import 'package:weather_app/widgets/custom_continer_widgets.dart';
 import 'package:weather_app/widgets/custom_dividers.dart';
 
+
 class WeatherCityScrren extends StatelessWidget {
   const WeatherCityScrren({super.key, required this.weather});
 
@@ -30,11 +31,16 @@ class WeatherCityScrren extends StatelessWidget {
                 ? Container(
                     decoration: BoxDecoration(
                       gradient: weather.text!.toLowerCase().contains('rainy') ||
-                              weather.text!.toLowerCase().contains('cloudy')
+                              weather.text!.toLowerCase().contains('patchy')
                           ? WColors.rainy
-                          : weather.text!.toLowerCase().contains('sunny')
-                              ? WColors.sunny
-                              : WColors.clear,
+                          : weather.text!.toLowerCase().contains('cloudy') ||
+                                  weather.text!
+                                      .toLowerCase()
+                                      .contains('overcast')
+                              ? WColors.cloudy
+                              : weather.text!.toLowerCase().contains('sunny')
+                                  ? WColors.sunny
+                                  : WColors.clear,
                     ),
                   )
                 : Shimmer.fromColors(
@@ -120,7 +126,8 @@ class WeatherCityScrren extends StatelessWidget {
                 ? 0
                 : 200, //
             child: weather.text!.toLowerCase().contains('rainy') ||
-                    weather.text!.toLowerCase().contains('patchy')
+                    weather.text!.toLowerCase().contains('patchy')||
+                    weather.text!.toLowerCase().contains('thunder')
                 ? Lottie.network(
                     "https://lottie.host/52f4e94a-21a8-47fb-81d2-2e2d7f6c534a/HjJehQX5U2.json",
                     width: 300,

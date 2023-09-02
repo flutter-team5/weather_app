@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class WColors {
   static const cloudy = LinearGradient(
     colors: [
-      Color.fromARGB(255, 153, 210, 222),
-      Color.fromARGB(255, 126, 177, 188),
+      Color.fromARGB(255, 186, 232, 241),
+      Color.fromARGB(255, 159, 202, 211),
     ],
   );
 
@@ -24,8 +24,8 @@ class WColors {
 
   static const clear = LinearGradient(
     colors: [
-      Color.fromARGB(255, 184, 243, 250),
-      Color.fromARGB(255, 227, 249, 246)
+      Color.fromARGB(255, 208, 233, 254),
+      Color.fromARGB(255, 187, 222, 251),
     ],
   );
 
