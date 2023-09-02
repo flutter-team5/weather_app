@@ -25,14 +25,19 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WSpaces.kVspace8,
-              const Text(
-                "Weather",
-                style: TextStyle(
-                  fontSize: 38,
-                  fontFamily: 'ADLaMDisplay-Regular',
-                  //'Rubik-VariableFont_wght'
-                  color: Color.fromARGB(157, 0, 0, 0),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Weather",
+                    style: TextStyle(
+                      fontSize: 38,
+                      fontFamily: 'ADLaMDisplay-Regular',
+                      color: Color.fromARGB(157, 0, 0, 0),
+                    ),
+                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.sunny))
+                ],
               ),
               WSpaces.kVspace4,
               const SearchField(),
@@ -56,10 +61,9 @@ class HomeScreen extends StatelessWidget {
                     );
                   } else if (state is AddWeatherSuccessedState) {
                     context.read<WeatherBloc>().add(GetWeathersEvent());
-                  }else if (state is CityNotFoundState) {
+                  } else if (state is CityNotFoundState) {
                     context.read<WeatherBloc>().add(GetWeathersEvent());
-                  }
-                   else if (state is FailedState) {
+                  } else if (state is FailedState) {
                     return const FailedStateMsg();
                   }
                   return const SizedBox.shrink();
