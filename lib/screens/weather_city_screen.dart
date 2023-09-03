@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/extension/navigator.dart';
 import 'package:weather_app/model/weather.dart';
+import 'package:weather_app/screens/home_screen.dart';
 import 'package:weather_app/widgets/weather_city_screen/city_column_info.dart';
 import 'package:weather_app/widgets/weather_city_screen/clear_weather_container.dart';
 import 'package:weather_app/widgets/weather_city_screen/custom_continer_widgets.dart';
@@ -50,8 +51,10 @@ class WeatherCityScrren extends StatelessWidget {
             child: ClipPath(
               clipper: CustomClipPath(),
               child: Container(
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(149, 255, 255, 255),
+                decoration: BoxDecoration(
+                  color: chosenTheme
+                      ? const Color.fromARGB(154, 76, 76, 76)
+                      : const Color.fromARGB(146, 255, 255, 255),
                 ),
               ),
             ),
@@ -64,8 +67,10 @@ class WeatherCityScrren extends StatelessWidget {
             child: ClipPath(
               clipper: CustomClipPath1(),
               child: Container(
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(128, 255, 255, 255),
+                decoration: BoxDecoration(
+                  color: chosenTheme
+                      ? const Color.fromARGB(154, 76, 76, 76)
+                      : const Color.fromARGB(146, 255, 255, 255),
                 ),
               ),
             ),
@@ -78,8 +83,10 @@ class WeatherCityScrren extends StatelessWidget {
             child: ClipPath(
               clipper: CustomClipPath2(),
               child: Container(
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                decoration: BoxDecoration(
+                  color: chosenTheme
+                      ? const Color.fromARGB(255, 76, 76, 76)
+                      : const Color.fromARGB(255, 255, 255, 255),
                 ),
               ),
             ),

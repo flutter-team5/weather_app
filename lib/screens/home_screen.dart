@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:weather_app/app_theme/app_theme.dart';
+import 'package:weather_app/bloc/theme_bloc/theme_bloc.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/constants/spacing.dart';
 import 'package:weather_app/widgets/home_screen/failed_state_msg.dart';
 import 'package:weather_app/widgets/home_screen/search_filed.dart';
 import 'package:weather_app/widgets/home_screen/weather_listview.dart';
+
+bool chosenTheme = true;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -15,9 +19,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<WeatherBloc>().add(GetWeathersEvent());
+    final lightTheme = AppTheme.values[0];
+    final darkTheme = AppTheme.values[1];
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
-      // backgroundColor: Colors.white,
+      // backgroundColor: const Color.fromARGB(255, 224, 224, 224),
       body: SafeArea(
         bottom: false,
         child: Padding(
@@ -26,14 +32,25 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WSpaces.kVspace8,
-              const Text(
-                "Weather",
-                style: TextStyle(
-                  fontSize: 38,
-                  fontFamily: 'ADLaMDisplay-Regular',
-                  //'Rubik-VariableFont_wght'
-                  color: Color.fromARGB(157, 0, 0, 0),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Weather",
+                    style: TextStyle(
+                      fontSize: 38,
+                      fontFamily: 'ADLaMDisplay-Regular',
+                      color: Color.fromARGB(255, 151, 151, 151),
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        context.read<ThemeBloc>().add(ThemeChanged(
+                            theme: chosenTheme ? lightTheme : darkTheme));
+                        chosenTheme = !chosenTheme;
+                      },
+                      icon: const Icon(Icons.sunny))
+                ],
               ),
               WSpaces.kVspace4,
               const SearchField(),
