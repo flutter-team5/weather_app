@@ -30,6 +30,9 @@ Our project was well structured and easy to understand
          <br> ![clear](https://github.com/flutter-team5/weather_app/assets/101333803/edad075e-5366-4221-8e6e-61d4127b5066)<br>
       - Sunny<br>
          <br> ![sunny](https://github.com/flutter-team5/weather_app/assets/101333803/7dd8ee99-9515-4a08-bf7f-16ba4050630b)<br>
+         
+  - Theme switching feature:<br>
+  <br>![theme](https://github.com/flutter-team5/weather_app/assets/101333803/ed838cca-3a57-4904-a2a6-452f0ca9bf48)<br>
 
 
 Thank you!
