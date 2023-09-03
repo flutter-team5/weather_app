@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -23,7 +25,6 @@ class HomeScreen extends StatelessWidget {
     final darkTheme = AppTheme.values[1];
 
     return Scaffold(
-      // backgroundColor: const Color.fromARGB(255, 224, 224, 224),
       body: SafeArea(
         bottom: false,
         child: Padding(
@@ -55,7 +56,19 @@ class HomeScreen extends StatelessWidget {
               WSpaces.kVspace4,
               const SearchField(),
               WSpaces.kVspace16,
-              BlocBuilder<WeatherBloc, WeatherState>(
+              BlocConsumer<WeatherBloc, WeatherState>(
+                listener: (context, state) {
+                  if (state is CityNotFoundState) {
+                    ElegantNotification.error(
+                      width: 360,
+                      notificationPosition: NotificationPosition.topLeft,
+                      animation: AnimationType.fromTop,
+                      title: const Text('Not found'),
+                      description: const Text('This city is not found'),
+                      onDismiss: () {},
+                    ).show(context);
+                  }
+                },
                 builder: (context, state) {
                   if (state is LoadingState) {
                     return Padding(
