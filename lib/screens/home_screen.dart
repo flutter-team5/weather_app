@@ -9,6 +9,8 @@ import 'package:weather_app/widgets/home_screen/failed_state_msg.dart';
 import 'package:weather_app/widgets/home_screen/search_filed.dart';
 import 'package:weather_app/widgets/home_screen/weather_listview.dart';
 
+bool chosenTheme = true;
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
@@ -19,10 +21,9 @@ class HomeScreen extends StatelessWidget {
     context.read<WeatherBloc>().add(GetWeathersEvent());
     final lightTheme = AppTheme.values[0];
     final darkTheme = AppTheme.values[1];
-    bool chosenTheme = true;
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
-      // backgroundColor: Colors.white,
+      // backgroundColor: const Color.fromARGB(255, 224, 224, 224),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 38,
                       fontFamily: 'ADLaMDisplay-Regular',
-                      color: Color.fromARGB(157, 0, 0, 0),
+                      color: Color.fromARGB(255, 151, 151, 151),
                     ),
                   ),
                   IconButton(
