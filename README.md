@@ -34,6 +34,8 @@ Our project was well structured and easy to understand
   - Theme switching feature:<br>
   <br>![theme](https://github.com/flutter-team5/weather_app/assets/101333803/ed838cca-3a57-4904-a2a6-452f0ca9bf48)<br>
 
+  - Also, the user can search for a specific city, and it will be addes to cities list automatically.
+
 
 Thank you!
 
